@@ -5,7 +5,7 @@ var GreeterMsg = React.createClass({
     return(
       <div>
         <h2>Hello {name} :)</h2>
-        <p>{msg}.. This is yet another p tag!</p>
+        <p>{msg}!</p>
       </div>
     );
   }
@@ -14,17 +14,30 @@ var GreeterMsg = React.createClass({
 var StaticForm = React.createClass({
   onFormSubmit:function(e){
     e.preventDefault();
+
+    var updates={};
     var name = this.refs.name.value;
+    var msg = this.refs.msg.value;
+
     if(name.length>0){
       this.refs.name.value='';
-      this.props.onNewName(name);
+      updates.name = name;
     }
+
+    if(msg.length>0){
+      this.refs.msg.value='';
+      updates.msg = msg;
+    }
+    this.props.onNewData(updates);
   },
   render:function(){
     return (
       <form onSubmit={this.onFormSubmit}>
-        <input type="text" ref="name"/>
-        <button>Change Name</button>
+        <div>
+          <input type="text" ref="name" placeholder="Enter a new name"/><br/><br/>
+          <textarea rows="4" cols="40" ref="msg" placeholder="Enter a new message"></textarea><br/><br/>
+          <button>Update</button>
+        </div>
       </form>
     )
   }
@@ -39,22 +52,21 @@ var Greeter = React.createClass({
   },
   getInitialState: function(){
     return{
-      name:this.props.name
+      name:this.props.name,
+      msg:this.props.msg
     };
   },
-  handleNewName: function(name){
-      this.setState({
-        name:name
-      });
+  handleNewData: function(updates){
+      this.setState(updates);
   },
   render:function(){
     var name = this.state.name;
-    var msg = this.props.msg;
+    var msg = this.state.msg;
 
     return (
       <div>
         <GreeterMsg name={name} msg={msg}/>
-        <StaticForm onNewName={this.handleNewName}/>
+        <StaticForm onNewData={this.handleNewData}/>
       </div>
     );
   }
