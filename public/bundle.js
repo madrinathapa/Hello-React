@@ -48,107 +48,7 @@
 
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(158);
-
-	var GreeterMsg = React.createClass({
-	  displayName: 'GreeterMsg',
-
-	  render: function render() {
-	    var name = this.props.name;
-	    var msg = this.props.msg;
-	    return React.createElement(
-	      'div',
-	      null,
-	      React.createElement(
-	        'h2',
-	        null,
-	        'Hello ',
-	        name,
-	        ' :)'
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        msg,
-	        '!'
-	      )
-	    );
-	  }
-	});
-
-	var StaticForm = React.createClass({
-	  displayName: 'StaticForm',
-
-	  onFormSubmit: function onFormSubmit(e) {
-	    e.preventDefault();
-
-	    var updates = {};
-	    var name = this.refs.name.value;
-	    var msg = this.refs.msg.value;
-
-	    if (name.length > 0) {
-	      this.refs.name.value = '';
-	      updates.name = name;
-	    }
-
-	    if (msg.length > 0) {
-	      this.refs.msg.value = '';
-	      updates.msg = msg;
-	    }
-	    this.props.onNewData(updates);
-	  },
-	  render: function render() {
-	    return React.createElement(
-	      'form',
-	      { onSubmit: this.onFormSubmit },
-	      React.createElement(
-	        'div',
-	        null,
-	        React.createElement('input', { type: 'text', ref: 'name', placeholder: 'Enter a new name' }),
-	        React.createElement('br', null),
-	        React.createElement('br', null),
-	        React.createElement('textarea', { rows: '4', cols: '40', ref: 'msg', placeholder: 'Enter a new message' }),
-	        React.createElement('br', null),
-	        React.createElement('br', null),
-	        React.createElement(
-	          'button',
-	          null,
-	          'Update'
-	        )
-	      )
-	    );
-	  }
-	});
-
-	var Greeter = React.createClass({
-	  displayName: 'Greeter',
-
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      name: 'React',
-	      msg: 'The default message'
-	    };
-	  },
-	  getInitialState: function getInitialState() {
-	    return {
-	      name: this.props.name,
-	      msg: this.props.msg
-	    };
-	  },
-	  handleNewData: function handleNewData(updates) {
-	    this.setState(updates);
-	  },
-	  render: function render() {
-	    var name = this.state.name;
-	    var msg = this.state.msg;
-
-	    return React.createElement(
-	      'div',
-	      null,
-	      React.createElement(GreeterMsg, { name: name, msg: msg }),
-	      React.createElement(StaticForm, { onNewData: this.handleNewData })
-	    );
-	  }
-	});
+	var Greeter = __webpack_require__(159);
 
 	ReactDOM.render(React.createElement(Greeter, { name: 'Madrina', msg: 'The message is here.' }), document.getElementById('app'));
 
@@ -19849,6 +19749,139 @@
 
 	module.exports = __webpack_require__(3);
 
+
+/***/ }),
+/* 159 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var GreeterMsg = __webpack_require__(160);
+	var StaticForm = __webpack_require__(161);
+
+	var Greeter = React.createClass({
+	  displayName: 'Greeter',
+
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      name: 'React',
+	      msg: 'The default message'
+	    };
+	  },
+	  getInitialState: function getInitialState() {
+	    return {
+	      name: this.props.name,
+	      msg: this.props.msg
+	    };
+	  },
+	  handleNewData: function handleNewData(updates) {
+	    this.setState(updates);
+	  },
+	  render: function render() {
+	    var name = this.state.name;
+	    var msg = this.state.msg;
+
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(GreeterMsg, { name: name, msg: msg }),
+	      React.createElement(StaticForm, { onNewData: this.handleNewData })
+	    );
+	  }
+	});
+
+	module.exports = Greeter;
+
+/***/ }),
+/* 160 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var GreeterMsg = React.createClass({
+	  displayName: 'GreeterMsg',
+
+	  render: function render() {
+	    var name = this.props.name;
+	    var msg = this.props.msg;
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'h2',
+	        null,
+	        'Hello ',
+	        name,
+	        ' :)'
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        msg,
+	        '!'
+	      )
+	    );
+	  }
+	});
+
+	module.exports = GreeterMsg;
+
+/***/ }),
+/* 161 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var StaticForm = React.createClass({
+	  displayName: 'StaticForm',
+
+	  onFormSubmit: function onFormSubmit(e) {
+	    e.preventDefault();
+
+	    var updates = {};
+	    var name = this.refs.name.value;
+	    var msg = this.refs.msg.value;
+
+	    if (name.length > 0) {
+	      this.refs.name.value = '';
+	      updates.name = name;
+	    }
+
+	    if (msg.length > 0) {
+	      this.refs.msg.value = '';
+	      updates.msg = msg;
+	    }
+	    this.props.onNewData(updates);
+	  },
+	  render: function render() {
+	    return React.createElement(
+	      'form',
+	      { onSubmit: this.onFormSubmit },
+	      React.createElement(
+	        'div',
+	        null,
+	        React.createElement('input', { type: 'text', ref: 'name', placeholder: 'Enter a new name' }),
+	        React.createElement('br', null),
+	        React.createElement('br', null),
+	        React.createElement('textarea', { rows: '4', cols: '40', ref: 'msg', placeholder: 'Enter a new message' }),
+	        React.createElement('br', null),
+	        React.createElement('br', null),
+	        React.createElement(
+	          'button',
+	          null,
+	          'Update'
+	        )
+	      )
+	    );
+	  }
+	});
+
+	module.exports = StaticForm;
 
 /***/ })
 /******/ ]);
